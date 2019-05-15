@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: order
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG
+      profile: test
+    stream:
+      bindings:
+        myInput:
+          group: order
+          content-type: application/json
+  zipkin:
+    base-url: http://192.168.25.132:9411/
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
+      rate: 50
+  redis:
+    host: 192.168.25.132
+    port: 6379
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: "*"
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
