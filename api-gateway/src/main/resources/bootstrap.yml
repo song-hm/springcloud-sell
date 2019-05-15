@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG
+      profile: dev
+  rabbitmq:
+    host: 192.168.25.132
+    port: 5672
+    username: guest
+    password: guest
+  redis:
+    host: 192.168.25.132
+    port: 6379
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+zuul:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
